@@ -472,7 +472,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 757920662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5050a73960e7244659f7fcdc46682f88, type: 3}
+  m_Script: {fileID: 11500000, guid: da4888196ba6d4b56a3aec07499f746b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 600
@@ -572,7 +572,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966016276}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1f7eade8f07054f9487cb5a5fb7eccda, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -660,7 +660,7 @@ GameObject:
   - component: {fileID: 1734996723}
   m_Layer: 0
   m_Name: FollowingCamera
-  m_TagString: Untagged
+  m_TagString: FollowingCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -743,7 +743,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093582429}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1f7eade8f07054f9487cb5a5fb7eccda, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -762,7 +762,7 @@ GameObject:
   - component: {fileID: 2105971169}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
