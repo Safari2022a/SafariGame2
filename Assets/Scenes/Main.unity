@@ -123,75 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &274903821
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.9897387
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.9149643
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.9897387
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 43.24
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.58
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9.91
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7217353
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.010373097
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.69087595
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.041001543
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -4.107
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -272.595
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 2.577
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
-      propertyPath: m_Name
-      value: damazika2_anime
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
 --- !u!1 &322179565
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,3 +847,64 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &6098227014123853685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 43.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7217353
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.010373097
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.69087595
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.041001543
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -4.107
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -272.595
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993156776161493907, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 2.577
+      objectReference: {fileID: 0}
+    - target: {fileID: 6368134923767028009, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_Name
+      value: damazika2_anime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683593750290542588, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2efc7bd2744585b40be995612cf9b84f, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c11e720154929a4590987a2cd6e5d83, type: 3}
