@@ -6,10 +6,20 @@ public class BasicHandler : MonoBehaviour
 {
     Rigidbody rb;
     Transform cameraT;
+    AudioSource audioSource;
+    
+    int walkCnt = 0;
+    bool walkSoundOK = true;
+    [SerializeField] AudioClip walkSound0;
+    [SerializeField] AudioClip walkSound1;
 
+    [SerializeField] AudioClip jumpSound;
+    [SerializeField] AudioClip jumpLandSound;
+
+    [SerializeField] float walkPower = 250f;
+    [SerializeField] float jumpPower = 250f;
+    
     [SerializeField, Range(0f, 1f)]
-    float walkSpeed = 100f;
-    float jumpPower = 250f;
     float mouseSensitivity = 1f;
     
     bool isGround = true;
@@ -18,6 +28,7 @@ public class BasicHandler : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cameraT = GameObject.FindWithTag("FollowingCamera").transform;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -42,17 +53,32 @@ public class BasicHandler : MonoBehaviour
     private void FixedUpdate()
     {
         //移動
-        Vector3 force = Input.GetAxis("Vertical") * transform.forward * walkSpeed * Time.deltaTime;
+        Vector3 force = Input.GetAxis("Vertical") * transform.forward * walkPower * Time.deltaTime;
         rb.AddForce(force);
-        force = Input.GetAxis("Horizontal") * transform.right * walkSpeed * Time.deltaTime;
+        force = Input.GetAxis("Horizontal") * transform.right * walkPower * Time.deltaTime;
         rb.AddForce(force);
+        
+        if (Input.GetAxis("Vertical") + Input.GetAxis("Horizontal") > 0 && isGround && walkSoundOK) {
+            walkSoundOK = false;
+            if (walkCnt == 0) {
+                audioSource.PlayOneShot(walkSound0);
+            } else {
+                audioSource.PlayOneShot(walkSound1);
+            }
+            walkCnt = (walkCnt + 1) % 2;
+
+            StartCoroutine(Utility.DelayCoroutine(0.5f, () => {
+                walkSoundOK = true;
+            }));
+        }
+        //
 
         //ジャンプ
         if (isGround && Input.GetAxis("Jump") == 1f)
         {
-            print("Jump!");
             isGround = false;
             rb.AddForce(new Vector3(0, jumpPower, 0));
+            audioSource.PlayOneShot(jumpSound);
         }
     }
 
@@ -62,6 +88,7 @@ public class BasicHandler : MonoBehaviour
         if (true)
         {
             isGround = true;
+            audioSource.PlayOneShot(jumpLandSound);
         }
     }
 }
