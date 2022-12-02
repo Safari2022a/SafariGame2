@@ -6,6 +6,13 @@ TagManager:
   tags:
   - FollowingCamera
   - Ground
+  - Panel/Start
+  - Panel/OP
+  - Panel/AnimalSelect
+  - Panel/ModeSelect
+  - Panel/TouchMode
+  - Panel/Controller
+  - Panel/Container
   layers:
   - Default
   - TransparentFX
@@ -17,7 +24,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Animals
   - 
   - 
   - 
