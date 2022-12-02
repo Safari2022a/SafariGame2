@@ -13,6 +13,8 @@ TagManager:
   - Panel/TouchMode
   - Panel/Controller
   - Panel/Container
+  - Effect/Hear
+  - Effect/Hate
   layers:
   - Default
   - TransparentFX

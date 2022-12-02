@@ -61,11 +61,15 @@ public class PanelController : MonoBehaviour
         Destroy(GameObject.FindWithTag("Panel/AnimalSelect"));
         GameObject panel = Instantiate(panelModeSelectPrefab, pCont.transform.position, pCont.transform.rotation);
         panel.transform.SetParent(pCont.transform);
+        
+        _currentPanel = Panel.ModeSelect;
     }
 
     public void OnModeTouchButton() {
         Destroy(GameObject.FindWithTag("Panel/ModeSelect"));
         GameObject panel = Instantiate(panelTouchModePrefab, pCont.transform.position, pCont.transform.rotation);
         panel.transform.SetParent(pCont.transform);
+        
+        _currentPanel = Panel.TouchMode;
     }
 }
