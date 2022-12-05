@@ -33,7 +33,7 @@ public class BasicHandler : MonoBehaviour
 
     void Update()
     {
-        //視点回転
+        // 視点回転
         Vector3 angles = transform.localEulerAngles;
         angles.y += Input.GetAxis("Mouse X") * Time.deltaTime * 1200f * mouseSensitivity;
         transform.localEulerAngles = angles;
@@ -47,7 +47,7 @@ public class BasicHandler : MonoBehaviour
             angles.x = -90f;
         }
         cameraT.localEulerAngles = angles;
-        //
+        
     }
 
     private void FixedUpdate()

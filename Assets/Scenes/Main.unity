@@ -232,7 +232,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &43213195
 PrefabInstance:
@@ -742,7 +742,7 @@ Transform:
   - {fileID: 1567952199}
   - {fileID: 1349717259}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &239540810 stripped
 GameObject:
@@ -1677,7 +1677,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &501256937
 GameObject:
@@ -2752,7 +2752,7 @@ RectTransform:
   - {fileID: 223415978}
   - {fileID: 2126518160}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5439,6 +5439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1797835798}
   - component: {fileID: 1797835797}
+  - component: {fileID: 1797835799}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -5557,6 +5558,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1797835799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797835796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c1a1c7088624596b57c8959764b4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherUserPrefab: {fileID: 0}
 --- !u!1 &1798117252 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -208595431880416365, guid: f620302442d69bd4480d2f46b8f9cf4f, type: 3}
