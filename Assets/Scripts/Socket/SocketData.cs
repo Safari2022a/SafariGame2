@@ -24,7 +24,29 @@ class DataCreateUser {
     }
 }
 
-class DataTransform : MonoBehaviour {
+class DataTransform {
     public int userID;
-    public Transform transform;
+    public float[] transformAry;
+
+    // public DataTransform(int userID, Transform transform) {
+    //     this.userID = userID;
+        
+    //     transformAry = new float[6];
+    //     transformAry[0] = transform.position.x;
+    //     transformAry[1] = transform.position.y;
+    //     transformAry[2] = transform.position.z;
+        
+    //     transformAry[3] = transform.eulerAngles.x;
+    //     transformAry[4] = transform.eulerAngles.y;
+    //     transformAry[5] = transform.eulerAngles.z;
+
+    //     // transformAry[6] = transform.scale.x;
+    //     // transformAry[7] = transform.scale.y;
+    //     // transformAry[8] = transform.scale.z;
+    // }
+
+    // public DataTransform(int userID, float[] transformAry) {
+    //     this.userID = userID;
+    //     this.transformAry = transformAry;
+    // }
 }

@@ -10,10 +10,12 @@ public class SocketClient : MonoBehaviour
 {
     WebSocket _webSocket;
     Queue<Action> _actions;
+    GameObject _gameController;
 
     void Start()
     {
         _actions = new Queue<Action>();
+        _gameController = GameObject.FindWithTag("GameController");
         // websocket
         _webSocket = new WebSocket($"ws://{Settings.Host}:{Settings.Port}/");
         _webSocket.OnOpen += (sender, e) => Debug.Log("WebSocket Open");
@@ -22,12 +24,16 @@ public class SocketClient : MonoBehaviour
         
         _webSocket.OnMessage += (sender, e) => {
             print("Message Recieved");
-            print(e.Data);
             SocketData data = JsonUtility.FromJson<SocketData>(e.Data);
-            if (data.type.Equals("CreateUser")) {
-                DataCreateUser dcu = JsonUtility.FromJson<DataCreateUser>(data.content);
+            if (data.type.Equals("UpdT")) {
                 _actions.Enqueue(() => {
-                    GameObject.FindWithTag("GameController").GetComponent<GameController>().CreateOtherUser(dcu.userID);
+                    DataTransform dt = JsonUtility.FromJson<DataTransform>(data.content);
+                    _gameController.GetComponent<GameController>().UpdateOtherUserT(dt.userID, dt.transformAry);
+                });
+            } else if (data.type.Equals("CreateUser")) {
+                _actions.Enqueue(() => {
+                    DataCreateUser dcu = JsonUtility.FromJson<DataCreateUser>(data.content);
+                    _gameController.GetComponent<GameController>().CreateOtherUser(dcu.userID);
                 });
             }
         };
@@ -43,7 +49,6 @@ public class SocketClient : MonoBehaviour
         // }
 
         if (_actions.Count > 0) {
-            print("cnt > 0");
             _actions.Dequeue()();
         }
     }
