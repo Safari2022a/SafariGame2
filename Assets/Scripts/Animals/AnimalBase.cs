@@ -16,6 +16,10 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] GameObject happyEffectPrefab;
     [SerializeField] GameObject hateEffectPrefab;
+    
+    AudioSource audioSource;
+    [SerializeField] AudioClip happySound;
+    [SerializeField] AudioClip hateSound;
 
     GameObject happyEffect;
     GameObject hateEffect;
@@ -33,6 +37,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         heart.transform.localScale = Vector3.zero;
         GameObject hate = transform.Find("Effects/hate/Particle System").gameObject;
         hate.transform.localScale = Vector3.zero;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -71,6 +77,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         happyEffect.transform.localPosition = Vector3.zero;
 
         state = AnimalState.Happy;
+        // audioSource.PlayOneShot(happySound);
     }
 
     void EndHappy() {
