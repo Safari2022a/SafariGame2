@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FollowingCamera
   - Ground
+  - OtherUsersContainer
   layers:
   - Default
   - TransparentFX
