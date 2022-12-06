@@ -7,6 +7,7 @@ TagManager:
   - FollowingCamera
   - Ground
   - OtherUsersContainer
+  - SocketClient
   layers:
   - Default
   - TransparentFX

@@ -35,6 +35,24 @@ public class SocketClient : MonoBehaviour
                     DataCreateUser dcu = JsonUtility.FromJson<DataCreateUser>(data.content);
                     _gameController.GetComponent<GameController>().CreateOtherUser(dcu.userID);
                 });
+            } else if (data.type.Equals("ActiveUsers")) {
+                _actions.Enqueue(() => {
+                    DataActiveUsers dau = JsonUtility.FromJson<DataActiveUsers>(data.content);
+                    _gameController.GetComponent<GameController>().UserID = dau.userID;
+                    
+                    foreach (DataCreateUser dcu in dau.activeUsers) {
+                        _gameController.GetComponent<GameController>().CreateOtherUser(dcu.userID);
+                    }
+
+                    DataOKUser dou = new DataOKUser(dau.userID);
+                    SocketData _data = new SocketData("OKUser", JsonUtility.ToJson(dou));
+                    _webSocket.Send(JsonUtility.ToJson(_data));
+                });
+            } else if (data.type.Equals("RemoveUser")) {
+                _actions.Enqueue(() => {
+                    DataRemoveUser dru = JsonUtility.FromJson<DataRemoveUser>(data.content);
+                    _gameController.GetComponent<GameController>().RemoveOtherUser(dru.userID);
+                });
             }
         };
         _webSocket.Connect();
@@ -56,12 +74,13 @@ public class SocketClient : MonoBehaviour
     private void OnDestroy()
     {
         print("destroy");
+        // DataRemoveUser dru = new DataRemoveUser()
+        // _webSocket.Send();
         _webSocket.Close();
         _webSocket = null;
     }
 
     public void Send(string data) {
-        print(_webSocket);
         _webSocket.Send(data);
     }
 }
