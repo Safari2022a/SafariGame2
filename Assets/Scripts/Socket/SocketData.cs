@@ -15,6 +15,7 @@ class SocketData {
     }
 }
 
+[System.Serializable]
 class DataCreateUser {
     public int userID;
     

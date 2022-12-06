@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     void Start() {
         _gc = GameObject.FindWithTag("GameController");
         _sc = GameObject.FindWithTag("SocketClient");
+
+        SocketData data = new SocketData("CreateUser", "");
+        _sc.GetComponent<SocketClient>().Send(JsonUtility.ToJson(data));
     }
 
     void OnDestroy() {

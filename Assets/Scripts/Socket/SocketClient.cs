@@ -23,7 +23,7 @@ public class SocketClient : MonoBehaviour
         _webSocket.OnClose += (sender, e) => Debug.Log("WebSocket Close");
         
         _webSocket.OnMessage += (sender, e) => {
-            print("Message Recieved");
+            // print("Message Recieved");
             SocketData data = JsonUtility.FromJson<SocketData>(e.Data);
             if (data.type.Equals("UpdT")) {
                 _actions.Enqueue(() => {
@@ -39,7 +39,6 @@ public class SocketClient : MonoBehaviour
                 _actions.Enqueue(() => {
                     DataActiveUsers dau = JsonUtility.FromJson<DataActiveUsers>(data.content);
                     _gameController.GetComponent<GameController>().UserID = dau.userID;
-                    
                     foreach (DataCreateUser dcu in dau.activeUsers) {
                         _gameController.GetComponent<GameController>().CreateOtherUser(dcu.userID);
                     }

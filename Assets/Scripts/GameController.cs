@@ -40,7 +40,9 @@ public class GameController : MonoBehaviour
     }
 
     public void UpdateOtherUserT(int id, float[] transformAry) {
-        if (!otherUsers.ContainsKey(id)) return;
+        print("me?");
+        if (!otherUsers.ContainsKey(id) || id == _userID) return;
+        print("me!");
         otherUsers[id].GetComponent<OtherUser>().UpdateTransform(transformAry);
     }
 
