@@ -55,6 +55,7 @@ public class BasicHandler : MonoBehaviour
         //
 
         if (Input.GetKeyDown(KeyCode.R)) {
+            movable = !movable;
             rotatable = !rotatable;
         }
     }
@@ -85,7 +86,7 @@ public class BasicHandler : MonoBehaviour
         //
 
         //ジャンプ
-        if (isGround && Input.GetAxis("Jump") == 1f)
+        if (isGround && Input.GetAxis("Jump") == 1f && movable)
         {
             isGround = false;
             rb.AddForce(new Vector3(0, jumpPower, 0));

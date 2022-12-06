@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Deer : AnimalBase
+public class Zebra : AnimalBase
 {
     override protected void Start() {
         base.Start();
-        _nickName = "ダマジカ";
+        _nickName = "シマウマ";
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+
     }
 }

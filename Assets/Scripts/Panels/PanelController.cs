@@ -46,7 +46,7 @@ public class PanelController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Player") && _currentPanel == Panel.OP) {
             Destroy(GameObject.FindWithTag("Panel/OP"));
             GameObject panel = Instantiate(panelAnimalSelectPrefab, pCont.transform.position, pCont.transform.rotation);
             panel.transform.SetParent(pCont.transform);   

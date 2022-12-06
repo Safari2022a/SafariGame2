@@ -12,22 +12,6 @@ public class GameController : MonoBehaviour
 
     void Start() {
         otherUsers = new Dictionary<int, GameObject>();
-        print(Keyboard.current);
-        print(InputSystem.devices);
-        print(InputSystem.devices.Count);
-        print(InputSystem.devices[0]);
-        print(InputSystem.devices[0].description);
-        print(InputSystem.devices[0].description.interfaceName);
-        print(InputSystem.devices[0].description.serial);
-        print(InputSystem.devices[0].description.deviceClass);
-        // print(InputSystem.devices[1]);
-        // print(InputSystem.devices[2]);
-        // print(Keyboard.all.Count);
-        // print(Keyboard.all);
-        // print(Keyboard.all[0]);
-        // print(Keyboard.all[1]);
-        // print(Keyboard.all[2]);
-        // print(GamePada.current);
     }
 
     public void CreateOtherUser(int id) {
