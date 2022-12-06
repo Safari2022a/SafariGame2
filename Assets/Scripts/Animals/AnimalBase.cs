@@ -77,7 +77,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         happyEffect.transform.localPosition = Vector3.zero;
 
         state = AnimalState.Happy;
-        // audioSource.PlayOneShot(happySound);
+        audioSource.PlayOneShot(happySound);
     }
 
     void EndHappy() {
