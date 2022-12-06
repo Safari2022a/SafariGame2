@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicHandler : MonoBehaviour
 {
     Rigidbody rb;
-    Transform cameraT;
+    protected Transform cameraT;
     AudioSource audioSource;
     
     int walkCnt = 0;
@@ -24,6 +24,9 @@ public class BasicHandler : MonoBehaviour
     
     bool isGround = true;
 
+    bool rotatable = true;
+    bool movable = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -33,43 +36,51 @@ public class BasicHandler : MonoBehaviour
 
     void Update()
     {
-        // 視点回転
-        Vector3 angles = transform.localEulerAngles;
-        angles.y += Input.GetAxis("Mouse X") * Time.deltaTime * 1200f * mouseSensitivity;
-        transform.localEulerAngles = angles;
+        //視点回転
+        if (rotatable) {
+            Vector3 angles = transform.localEulerAngles;
+            angles.y += Input.GetAxis("Mouse X") * Time.deltaTime * 1200f * mouseSensitivity;
+            transform.localEulerAngles = angles;
 
-        angles = cameraT.localEulerAngles;
-        if (angles.x > 180f) { angles.x -= 360f; } //0 - 1 = 359になるからだけど、これでいいのかな？
-        angles.x -= Input.GetAxis("Mouse Y") * Time.deltaTime * 1200f * mouseSensitivity;
-        if (angles.x > 90f) {
-            angles.x = 90f;
-        } else if (angles.x < -90f) {
-            angles.x = -90f;
+            angles = cameraT.localEulerAngles;
+            if (angles.x > 180f) { angles.x -= 360f; } //0 - 1 = 359になるからだけど、これでいいのかな？
+            angles.x -= Input.GetAxis("Mouse Y") * Time.deltaTime * 1200f * mouseSensitivity;
+            if (angles.x > 90f) {
+                angles.x = 90f;
+            } else if (angles.x < -90f) {
+                angles.x = -90f;
+            }
+            cameraT.localEulerAngles = angles;
         }
-        cameraT.localEulerAngles = angles;
-        
+        //
+
+        if (Input.GetKeyDown(KeyCode.R)) {
+            rotatable = !rotatable;
+        }
     }
 
     private void FixedUpdate()
     {
         //移動
-        Vector3 force = Input.GetAxis("Vertical") * transform.forward * walkPower * Time.deltaTime;
-        rb.AddForce(force);
-        force = Input.GetAxis("Horizontal") * transform.right * walkPower * Time.deltaTime;
-        rb.AddForce(force);
-        
-        if (Input.GetAxis("Vertical") + Input.GetAxis("Horizontal") > 0 && isGround && walkSoundOK) {
-            walkSoundOK = false;
-            if (walkCnt == 0) {
-                audioSource.PlayOneShot(walkSound0);
-            } else {
-                audioSource.PlayOneShot(walkSound1);
-            }
-            walkCnt = (walkCnt + 1) % 2;
+        if (movable) {
+            Vector3 force = Input.GetAxis("Vertical") * transform.forward * walkPower * Time.deltaTime;
+            rb.AddForce(force);
+            force = Input.GetAxis("Horizontal") * transform.right * walkPower * Time.deltaTime;
+            rb.AddForce(force);
+            
+            if (Input.GetAxis("Vertical") + Input.GetAxis("Horizontal") > 0 && isGround && walkSoundOK) {
+                walkSoundOK = false;
+                if (walkCnt == 0) {
+                    audioSource.PlayOneShot(walkSound0);
+                } else {
+                    audioSource.PlayOneShot(walkSound1);
+                }
+                walkCnt = (walkCnt + 1) % 2;
 
-            StartCoroutine(Utility.DelayCoroutine(0.5f, () => {
-                walkSoundOK = true;
-            }));
+                StartCoroutine(Utility.DelayCoroutine(0.5f, () => {
+                    walkSoundOK = true;
+                }));
+            }
         }
         //
 
