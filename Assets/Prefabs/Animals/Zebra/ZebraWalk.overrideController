@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ZebraWalk
+  m_Controller: {fileID: 9100000, guid: cec8416a90c054761ae9646ab5305cdf, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 8554096234487413966, guid: a9b7d168391ec4d32bc642eb5488f132, type: 3}
+    m_OverrideClip: {fileID: 3754344789416897861, guid: ce3521b6c9ecf4dc19273cbb2274cde2, type: 3}
+  - m_OriginalClip: {fileID: 3754344789416897861, guid: c703e8976efdec8428d84f6bcad800ee, type: 3}
+    m_OverrideClip: {fileID: 3754344789416897861, guid: ce3521b6c9ecf4dc19273cbb2274cde2, type: 3}
