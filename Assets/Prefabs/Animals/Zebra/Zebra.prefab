@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8594724270873731847, guid: 40833ada786084054ae325cce61f7760, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594724270873731847, guid: 40833ada786084054ae325cce61f7760, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.571
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594724270873731847, guid: 40833ada786084054ae325cce61f7760, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.069
+      objectReference: {fileID: 0}
     - target: {fileID: 8594724270986400260, guid: 40833ada786084054ae325cce61f7760, type: 3}
       propertyPath: m_Name
       value: Zebra
@@ -79,9 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701cd15f4dbf146d68055a51067b434e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  happyEffectPrefab: {fileID: 0}
-  hateEffectPrefab: {fileID: 0}
-  happySound: {fileID: 0}
+  happyEffectPrefab: {fileID: 1686774748462927555, guid: 680912c527fab844c88ea42bf7d7b433, type: 3}
+  hateEffectPrefab: {fileID: 6280302286638239033, guid: 4ede8c3f0565cc6468d4b77e8b299aca, type: 3}
+  happySound: {fileID: 8300000, guid: 0ae876f665ba7184ebdc49a8c1c3d458, type: 3}
   hateSound: {fileID: 0}
 --- !u!1001 &7463158326352399173
 PrefabInstance:

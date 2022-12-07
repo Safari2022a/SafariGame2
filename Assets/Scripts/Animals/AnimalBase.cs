@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public enum AnimalState {
-    Normal,
+    Idle,
     Happy,
     Hate,
     Walking,
@@ -25,10 +25,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     [SerializeField] AudioClip happySound;
     [SerializeField] AudioClip hateSound;
 
-    GameObject happyEffect;
-    GameObject hateEffect;
-
-    AnimalState state = AnimalState.Normal;
+    AnimalState state = AnimalState.Idle;
 
     string happyStr = "qweasdzxc";
     string hateStr = "yuihjknm";
@@ -43,10 +40,10 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     // bool isHate = false;
 
     virtual protected void Start() {
-        GameObject heart = transform.Find("../Effects/heart/Particle System").gameObject;
-        heart.transform.localScale = Vector3.zero;
-        GameObject hate = transform.Find("../Effects/hate/Particle System").gameObject;
-        hate.transform.localScale = Vector3.zero;
+        // GameObject heart = transform.Find("Effects/heart/Particle System").gameObject;
+        // heart.transform.localScale = Vector3.zero;
+        // GameObject hate = transform.Find("Effects/hate/Particle System").gameObject;
+        // hate.transform.localScale = Vector3.zero;
 
         audioSource = GetComponent<AudioSource>();
         _paneCon = GameObject.FindWithTag("Panel/Controller");
@@ -63,6 +60,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         PanelController pc = GameObject.FindWithTag("Panel/Controller").GetComponent<PanelController>();
         if (pc.CurrentPanel == Panel.AnimalSelect) {
             pc.OnAnimalClick(gameObject);
+            startIdle();
         }
     }
 
@@ -71,14 +69,12 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
             for (int i = 0; i < happyStr.Length; i++) {
                 if (Input.GetKeyDown(happyStr[i].ToString())) {
                     StartHappy();
-                    StartCoroutine(Utility.DelayCoroutine(3, EndHappy));
                 }
             }
             
             for (int i = 0; i < hateStr.Length; i++) {
                 if (Input.GetKeyDown(hateStr[i].ToString())) {
                     StartHate();
-                    StartCoroutine(Utility.DelayCoroutine(3, EndHate));
                 }
             }
         }
@@ -109,43 +105,45 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
 
     void StartHappy() {
         if (state == AnimalState.Happy) return;
-        if (state == AnimalState.Hate) {
-            EndHate();
-        }
 
-        happyEffect = Instantiate(happyEffectPrefab);
+        GameObject happyEffect = Instantiate(happyEffectPrefab);
         happyEffect.transform.SetParent(transform.Find("Effects"));
         happyEffect.transform.localPosition = Vector3.zero;
 
         state = AnimalState.Happy;
         audioSource.PlayOneShot(happySound);
+
+        StartCoroutine(Utility.DelayCoroutine(1, () => {
+            EndHappy(happyEffect);
+        }));
     }
 
-    void EndHappy() {
+    void EndHappy(GameObject happyEffect) {
         if (state != AnimalState.Happy) return;
 
         Destroy(happyEffect);
-        state = AnimalState.Normal;
+        state = AnimalState.Idle;
     }
     
     void StartHate() {
         if (state == AnimalState.Hate) return;
-        if (state == AnimalState.Happy) {
-            EndHappy();
-        }
 
-        hateEffect = Instantiate(hateEffectPrefab);
+        GameObject hateEffect = Instantiate(hateEffectPrefab);
         hateEffect.transform.SetParent(transform.Find("Effects"));
         hateEffect.transform.localPosition = Vector3.zero;
         
         state = AnimalState.Hate;
+
+        StartCoroutine(Utility.DelayCoroutine(1, () => {
+            EndHate(hateEffect);
+        }));
     }
     
-    void EndHate() {
+    void EndHate(GameObject hateEffect) {
         if (state != AnimalState.Hate) return;
 
         Destroy(hateEffect);
-        state = AnimalState.Normal;
+        state = AnimalState.Idle;
     }
 
     void OnTriggerExit(Collider c) {
@@ -154,10 +152,12 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void stop() {
-        state = AnimalState.Normal;
+    void startIdle() {
+        state = AnimalState.Idle;
         _rb.velocity = Vector3.zero;
         _anim.SetTrigger("Idle");
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
+        print("startIdle");
     }
 
     void startWalk() {
@@ -184,6 +184,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     }
 
     IEnumerator RotateCoroutine(int frameCount, float angle, Action callBack) {
+        if (state == AnimalState.Idle) yield break;
+
         for (int i = 0; i < frameCount; i++) {
             Vector3 r = transform.localEulerAngles;
             r.y += angle;

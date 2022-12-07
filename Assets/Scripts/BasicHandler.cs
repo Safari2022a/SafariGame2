@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasicHandler : MonoBehaviour
 {
-    Rigidbody rb;
+    Rigidbody _rb;
     protected Transform cameraT;
     AudioSource audioSource;
     
@@ -29,7 +29,7 @@ public class BasicHandler : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
         cameraT = GameObject.FindWithTag("FollowingCamera").transform;
         audioSource = GetComponent<AudioSource>();
     }
@@ -65,9 +65,9 @@ public class BasicHandler : MonoBehaviour
         //移動
         if (movable) {
             Vector3 force = Input.GetAxis("Vertical") * transform.forward * walkPower * Time.deltaTime;
-            rb.AddForce(force);
+            _rb.AddForce(force);
             force = Input.GetAxis("Horizontal") * transform.right * walkPower * Time.deltaTime;
-            rb.AddForce(force);
+            _rb.AddForce(force);
             
             if (Input.GetAxis("Vertical") + Input.GetAxis("Horizontal") > 0 && isGround && walkSoundOK) {
                 walkSoundOK = false;
@@ -89,7 +89,7 @@ public class BasicHandler : MonoBehaviour
         if (isGround && Input.GetAxis("Jump") == 1f && movable)
         {
             isGround = false;
-            rb.AddForce(new Vector3(0, jumpPower, 0));
+            _rb.AddForce(new Vector3(0, jumpPower, 0));
             audioSource.PlayOneShot(jumpSound);
         }
     }
@@ -102,5 +102,9 @@ public class BasicHandler : MonoBehaviour
             isGround = true;
             audioSource.PlayOneShot(jumpLandSound);
         }
+    }
+
+    protected void startIdle() {
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
     }
 }
