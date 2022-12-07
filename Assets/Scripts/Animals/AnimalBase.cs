@@ -36,8 +36,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     protected float walkPower = 650f;
     protected float runPower = 720;
 
-    // bool isHeart = false;
-    // bool isHate = false;
+    GameObject touchableObj;
+    GameObject walkableObj;
 
     virtual protected void Start() {
         // GameObject heart = transform.Find("Effects/heart/Particle System").gameObject;
@@ -48,10 +48,14 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         audioSource = GetComponent<AudioSource>();
         _paneCon = GameObject.FindWithTag("Panel/Controller");
         _rb = GetComponent<Rigidbody>();
-        _anim = transform.Find("Walkable").GetComponent<Animator>();
 
         transform.Find("../Room").name += GetInstanceID();
         
+
+        walkableObj = transform.Find("Walkable").gameObject;
+        touchableObj = transform.Find("Touchable").gameObject;
+
+        toWalkable();
         startRun();
     }
 
@@ -61,6 +65,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         if (pc.CurrentPanel == Panel.AnimalSelect) {
             pc.OnAnimalClick(gameObject);
             startIdle();
+            toTouchable();
         }
     }
 
@@ -113,6 +118,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         state = AnimalState.Happy;
         audioSource.PlayOneShot(happySound);
 
+        _anim.SetTrigger("Happy");
+
         StartCoroutine(Utility.DelayCoroutine(1, () => {
             EndHappy(happyEffect);
         }));
@@ -133,6 +140,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         hateEffect.transform.localPosition = Vector3.zero;
         
         state = AnimalState.Hate;
+
+        _anim.SetTrigger("Hate");
 
         StartCoroutine(Utility.DelayCoroutine(1, () => {
             EndHate(hateEffect);
@@ -194,5 +203,17 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         }
 
         callBack();
+    }
+
+    void toTouchable() {
+        touchableObj.transform.localScale = new Vector3(1, 1, 1);
+        walkableObj.transform.localScale = Vector3.zero;
+        _anim = touchableObj.GetComponent<Animator>();
+    }
+    
+    void toWalkable() {
+        touchableObj.transform.localScale = Vector3.zero;
+        walkableObj.transform.localScale = new Vector3(1, 1, 1);
+        _anim = walkableObj.GetComponent<Animator>();
     }
 }
