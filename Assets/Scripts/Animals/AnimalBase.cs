@@ -69,7 +69,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void Update() {
+    protected virtual void Update() {
         if (_paneCon.GetComponent<PanelController>().CurrentAnimal == gameObject) {
             for (int i = 0; i < happyStr.Length; i++) {
                 if (Input.GetKeyDown(happyStr[i].ToString())) {
@@ -184,6 +184,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         int rotCnt = UnityEngine.Random.Range(140, 220);
         int angle = (int)Math.Pow(-1, UnityEngine.Random.Range(0, 2));
         StartCoroutine(RotateCoroutine(rotCnt, angle, () => {
+            if (state == AnimalState.Idle) return;
+
             if (UnityEngine.Random.Range(0f, 1f) < 0.5f) {
                 startWalk();
             } else {
@@ -193,9 +195,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     }
 
     IEnumerator RotateCoroutine(int frameCount, float angle, Action callBack) {
-        if (state == AnimalState.Idle) yield break;
-
         for (int i = 0; i < frameCount; i++) {
+            if (state == AnimalState.Idle) break;
             Vector3 r = transform.localEulerAngles;
             r.y += angle;
             transform.localEulerAngles = r;

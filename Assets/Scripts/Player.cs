@@ -5,18 +5,32 @@ using UnityEngine;
 
 public class Player : BasicHandler
 {
-    public void MoveFrontOfAnimal(GameObject animal) {
-        Vector3 p = animal.transform.position;
-        p.y += 0.5f;
-        // p.x += 2.32f; //微調整
-        p += animal.transform.forward * 5;
-        transform.position = p;
+    // Dictionary<string, Vector3[]> pos;
 
-        Vector3 r = animal.transform.eulerAngles + new Vector3(1, 180, 1);
-        // r.y += -10.101f; //微調整
-        transform.eulerAngles = r;
+    // protected override void Start() {
+    //     base.Start();
+    //     // pos = new Dictionary<string, Vector3[]>() {
+    //     //     { "ダマジカ", new Vector3[] { t, new Vector3(1, -15, 1) } },
+    //     //     { "シマウマ", new Vector3[] { t, new Vector3(1, -15, 1) } },
+    //     //     // { "ダマジカ", new Vector3[] { new Vector3(5.98f, 3.35f, -8.19f), new Vector3(1, -15, 1) } },
+    //     //     // { "シマウマ", new Vector3[] { new Vector3(5.98f, 3.35f, -8.19f), new Vector3(1, -15, 1) } },
+    //     //     { "ライオンの赤ちゃん", new Vector3[] { new Vector3(5.98f, 3.35f, -8.19f), new Vector3(1, -15, 1) } },
+    //     // };
+    // }
+
+    public void MoveFrontOfAnimal(GameObject animal) {
+        transform.position = animal.transform.position + animal.transform.forward * 5;
+        transform.localEulerAngles = animal.transform.eulerAngles + new Vector3(1, 180, 1);
         cameraT.transform.localEulerAngles = Vector3.zero;
 
         startIdle();
     }
+
+    protected override void Update() {
+        base.Update();
+        if (Input.GetKeyDown(",")) {
+            print(transform.position);
+        }
+    }
+
 }
