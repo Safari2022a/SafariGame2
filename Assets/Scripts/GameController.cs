@@ -8,10 +8,16 @@ public class GameController : MonoBehaviour
     Dictionary<int, GameObject> otherUsers;
     [SerializeField] GameObject otherUserPrefab;
 
+    AudioSource audioSource;
+    [SerializeField] AudioClip birdSound;
+
     // Keyboard keyboard = Keyboard.current;
 
     void Start() {
         otherUsers = new Dictionary<int, GameObject>();
+        audioSource = GetComponent<AudioSource>();
+
+        StartCoroutine(BirdCoroutine());
     }
 
     public void CreateOtherUser(int id) {
@@ -25,5 +31,12 @@ public class GameController : MonoBehaviour
 
     public void RemoveUser(int userID) {
         otherUsers.Remove(userID);
+    }
+
+    IEnumerator BirdCoroutine() {
+        while (true) {
+            audioSource.PlayOneShot(birdSound);
+            yield return new WaitForSeconds(Random.Range(4f, 12f));
+        }
     }
 }

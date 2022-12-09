@@ -24,6 +24,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     AudioSource audioSource;
     [SerializeField] AudioClip happySound;
     [SerializeField] AudioClip hateSound;
+    [SerializeField] AudioClip clickSound;
 
     AnimalState state = AnimalState.Idle;
 
@@ -66,6 +67,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
             pc.OnAnimalClick(gameObject);
             startIdle();
             toTouchable();
+            audioSource.PlayOneShot(clickSound);
         }
     }
 
@@ -140,6 +142,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         hateEffect.transform.localPosition = Vector3.zero;
         
         state = AnimalState.Hate;
+        audioSource.PlayOneShot(happySound);
 
         _anim.SetTrigger("Hate");
 
@@ -164,7 +167,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     void startIdle() {
         state = AnimalState.Idle;
         _rb.velocity = Vector3.zero;
-        _anim.SetTrigger("Idle");
+        // _anim.SetTrigger("Idle");
         _rb.constraints = RigidbodyConstraints.FreezeAll;
         print("startIdle");
     }
