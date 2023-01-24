@@ -128,10 +128,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     }
 
     void EndHappy(GameObject happyEffect) {
-        if (state != AnimalState.Happy) return;
-
         Destroy(happyEffect);
-        state = AnimalState.Idle;
+        if (state == AnimalState.Happy) state = AnimalState.Idle;
     }
     
     void StartHate() {
@@ -152,10 +150,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     }
     
     void EndHate(GameObject hateEffect) {
-        if (state != AnimalState.Hate) return;
-
         Destroy(hateEffect);
-        state = AnimalState.Idle;
+        if (state == AnimalState.Hate) state = AnimalState.Idle;
     }
 
     void OnTriggerExit(Collider c) {
