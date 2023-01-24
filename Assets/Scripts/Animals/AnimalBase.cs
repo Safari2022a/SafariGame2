@@ -24,6 +24,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     AudioSource audioSource;
     [SerializeField] AudioClip happySound;
     [SerializeField] AudioClip hateSound;
+    [SerializeField] AudioClip clickSound;
 
     AnimalState state = AnimalState.Idle;
 
@@ -36,8 +37,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     protected float walkPower = 650f;
     protected float runPower = 720;
 
-    // bool isHeart = false;
-    // bool isHate = false;
+    GameObject touchableObj;
+    GameObject walkableObj;
 
     virtual protected void Start() {
         // GameObject heart = transform.Find("Effects/heart/Particle System").gameObject;
@@ -48,10 +49,14 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         audioSource = GetComponent<AudioSource>();
         _paneCon = GameObject.FindWithTag("Panel/Controller");
         _rb = GetComponent<Rigidbody>();
-        _anim = transform.Find("Walkable").GetComponent<Animator>();
 
         transform.Find("../Room").name += GetInstanceID();
         
+
+        walkableObj = transform.Find("Walkable").gameObject;
+        touchableObj = transform.Find("Touchable").gameObject;
+
+        toWalkable();
         startRun();
     }
 
@@ -61,10 +66,12 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         if (pc.CurrentPanel == Panel.AnimalSelect) {
             pc.OnAnimalClick(gameObject);
             startIdle();
+            toTouchable();
+            audioSource.PlayOneShot(clickSound);
         }
     }
 
-    void Update() {
+    protected virtual void Update() {
         if (_paneCon.GetComponent<PanelController>().CurrentAnimal == gameObject) {
             for (int i = 0; i < happyStr.Length; i++) {
                 if (Input.GetKeyDown(happyStr[i].ToString())) {
@@ -113,16 +120,16 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         state = AnimalState.Happy;
         audioSource.PlayOneShot(happySound);
 
+        _anim.SetTrigger("Happy");
+
         StartCoroutine(Utility.DelayCoroutine(1, () => {
             EndHappy(happyEffect);
         }));
     }
 
     void EndHappy(GameObject happyEffect) {
-        if (state != AnimalState.Happy) return;
-
         Destroy(happyEffect);
-        state = AnimalState.Idle;
+        if (state == AnimalState.Happy) state = AnimalState.Idle;
     }
     
     void StartHate() {
@@ -133,6 +140,9 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         hateEffect.transform.localPosition = Vector3.zero;
         
         state = AnimalState.Hate;
+        audioSource.PlayOneShot(happySound);
+
+        _anim.SetTrigger("Hate");
 
         StartCoroutine(Utility.DelayCoroutine(1, () => {
             EndHate(hateEffect);
@@ -140,10 +150,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     }
     
     void EndHate(GameObject hateEffect) {
-        if (state != AnimalState.Hate) return;
-
         Destroy(hateEffect);
-        state = AnimalState.Idle;
+        if (state == AnimalState.Hate) state = AnimalState.Idle;
     }
 
     void OnTriggerExit(Collider c) {
@@ -155,7 +163,7 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     void startIdle() {
         state = AnimalState.Idle;
         _rb.velocity = Vector3.zero;
-        _anim.SetTrigger("Idle");
+        // _anim.SetTrigger("Idle");
         _rb.constraints = RigidbodyConstraints.FreezeAll;
         print("startIdle");
     }
@@ -175,6 +183,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         int rotCnt = UnityEngine.Random.Range(140, 220);
         int angle = (int)Math.Pow(-1, UnityEngine.Random.Range(0, 2));
         StartCoroutine(RotateCoroutine(rotCnt, angle, () => {
+            if (state == AnimalState.Idle) return;
+
             if (UnityEngine.Random.Range(0f, 1f) < 0.5f) {
                 startWalk();
             } else {
@@ -184,9 +194,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     }
 
     IEnumerator RotateCoroutine(int frameCount, float angle, Action callBack) {
-        if (state == AnimalState.Idle) yield break;
-
         for (int i = 0; i < frameCount; i++) {
+            if (state == AnimalState.Idle) break;
             Vector3 r = transform.localEulerAngles;
             r.y += angle;
             transform.localEulerAngles = r;
@@ -194,5 +203,17 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         }
 
         callBack();
+    }
+
+    void toTouchable() {
+        touchableObj.transform.localScale = new Vector3(1, 1, 1);
+        walkableObj.transform.localScale = Vector3.zero;
+        _anim = touchableObj.GetComponent<Animator>();
+    }
+    
+    void toWalkable() {
+        touchableObj.transform.localScale = Vector3.zero;
+        walkableObj.transform.localScale = new Vector3(1, 1, 1);
+        _anim = walkableObj.GetComponent<Animator>();
     }
 }

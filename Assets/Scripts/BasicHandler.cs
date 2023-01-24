@@ -27,14 +27,14 @@ public class BasicHandler : MonoBehaviour
     bool rotatable = true;
     bool movable = true;
 
-    void Start()
+    protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody>();
         cameraT = GameObject.FindWithTag("FollowingCamera").transform;
         audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         //視点回転
         if (rotatable) {
