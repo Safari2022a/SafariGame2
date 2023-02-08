@@ -30,7 +30,14 @@ public class SerialHandler : MonoBehaviour {
         }
     }
 
-    void Update() {
+    // void Update() {
+    //     if (Time.frameCount % 120 == 0) {
+    //         Write("Happy");
+    //     } else if (Time.frameCount % 60 == 0) {
+    //         Write("Hate");
+    //     }
+    // }
+    void FixedUpdate() {
         if (Time.frameCount % 120 == 0) {
             Write("Happy");
         } else if (Time.frameCount % 60 == 0) {
