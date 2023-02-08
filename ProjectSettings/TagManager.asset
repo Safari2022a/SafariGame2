@@ -15,6 +15,7 @@ TagManager:
   - Panel/Container
   - Effect/Hear
   - Effect/Hate
+  - SerialHandler
   layers:
   - Default
   - TransparentFX

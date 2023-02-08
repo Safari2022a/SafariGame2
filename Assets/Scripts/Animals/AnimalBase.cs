@@ -40,12 +40,9 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
     GameObject touchableObj;
     GameObject walkableObj;
 
-    virtual protected void Start() {
-        // GameObject heart = transform.Find("Effects/heart/Particle System").gameObject;
-        // heart.transform.localScale = Vector3.zero;
-        // GameObject hate = transform.Find("Effects/hate/Particle System").gameObject;
-        // hate.transform.localScale = Vector3.zero;
+    SerialHandler _serialHandler;
 
+    virtual protected void Start() {
         audioSource = GetComponent<AudioSource>();
         _paneCon = GameObject.FindWithTag("Panel/Controller");
         _rb = GetComponent<Rigidbody>();
@@ -58,6 +55,8 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
 
         toWalkable();
         startRun();
+
+        _serialHandler = GameObject.FindWithTag("SerialHandler").GetComponent<SerialHandler>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -125,11 +124,14 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         StartCoroutine(Utility.DelayCoroutine(1, () => {
             EndHappy(happyEffect);
         }));
+
+        _serialHandler.Write("Happy");
     }
 
     void EndHappy(GameObject happyEffect) {
         Destroy(happyEffect);
-        if (state == AnimalState.Happy) state = AnimalState.Idle;
+        // if (state == AnimalState.Happy) state = AnimalState.Idle;
+        if (state == AnimalState.Happy) startIdle();
     }
     
     void StartHate() {
@@ -147,11 +149,14 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         StartCoroutine(Utility.DelayCoroutine(1, () => {
             EndHate(hateEffect);
         }));
+
+        _serialHandler.Write("Hate");
     }
     
     void EndHate(GameObject hateEffect) {
         Destroy(hateEffect);
-        if (state == AnimalState.Hate) state = AnimalState.Idle;
+        // if (state == AnimalState.Hate) state = AnimalState.Idle;
+        if (state == AnimalState.Hate) startIdle();
     }
 
     void OnTriggerExit(Collider c) {
@@ -165,7 +170,9 @@ public class AnimalBase : MonoBehaviour, IPointerClickHandler
         _rb.velocity = Vector3.zero;
         // _anim.SetTrigger("Idle");
         _rb.constraints = RigidbodyConstraints.FreezeAll;
-        print("startIdle");
+
+        _serialHandler.Write("Idle");
+        print("Start Idle");
     }
 
     void startWalk() {

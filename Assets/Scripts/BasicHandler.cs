@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// プレイヤーの基本的な動作はここに記載
 public class BasicHandler : MonoBehaviour
 {
     Rigidbody _rb;
