@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9c89c7822c944acb6f565b4f2248cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: /dev/tty.M5StickSafari
+  portName: /dev/tty.usbserial-95D2CE256D
   bauRate: 9600
 --- !u!4 &38303488
 Transform:

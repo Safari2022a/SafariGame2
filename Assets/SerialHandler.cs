@@ -5,6 +5,7 @@ using System;
 using System.IO.Ports;
 using UnityEngine;
 using UniRx;
+using UniRx.Triggers;
 
 public class SerialHandler : MonoBehaviour {
     // [SerializeField] string portName = "/dev/tty.usbserial-95D2CE256D";
@@ -28,21 +29,24 @@ public class SerialHandler : MonoBehaviour {
         {
             Debug.Log ("can not open _serial port");
         }
-    }
 
-    // void Update() {
-    //     if (Time.frameCount % 120 == 0) {
-    //         Write("Happy");
-    //     } else if (Time.frameCount % 60 == 0) {
-    //         Write("Hate");
-    //     }
-    // }
-    void FixedUpdate() {
-        if (Time.frameCount % 120 == 0) {
-            Write("Happy");
-        } else if (Time.frameCount % 60 == 0) {
-            Write("Hate");
-        }
+        //test
+        this.UpdateAsObservable()
+            .Where(_ => Input.GetKeyDown(KeyCode.Alpha0))
+            .Subscribe(_ => {
+                Write("Idle");
+            });
+        this.UpdateAsObservable()
+            .Where(_ => Input.GetKeyDown(KeyCode.Alpha1))
+            .Subscribe(_ => {
+                Write("Happy");
+            });
+        this.UpdateAsObservable()
+            .Where(_ => Input.GetKeyDown(KeyCode.Alpha2))
+            .Subscribe(_ => {
+                Write("Hate");
+            });
+        //
     }
 	
     public void Read() {
@@ -56,7 +60,7 @@ public class SerialHandler : MonoBehaviour {
     public void Write(string s) {
         if (_serial.IsOpen) {
             _serial.Write($"{s}\n");
-            // print($"write: {s}");
+            print($"write: {s}");
         }
     }
 
